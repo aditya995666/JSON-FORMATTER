@@ -3,25 +3,25 @@ import json
 
 app = Flask(__name__)
 
-# 📌 Dictionary of known error suggestions
+# Dictionary of known error suggestions
 error_suggestions = {
     "Expecting property name enclosed in double quotes":
-        "🔧 Tip: Keys (like 'name') must use double quotes → use \"name\" not 'name'.",
+        " Tip: Keys (like 'name') must use double quotes → use \"name\" not 'name'.",
 
     "Expecting ',' delimiter":
-        "🔧 Tip: Missing comma between items. Check if a comma is missing before this line.",
+        "Tip: Missing comma between items. Check if a comma is missing before this line.",
 
     "Extra data":
-        "🔧 Tip: More than one JSON object found. JSON must start and end with exactly one object or array.",
+        "Tip: More than one JSON object found. JSON must start and end with exactly one object or array.",
 
     "Unterminated string starting at":
-        "🔧 Tip: String not closed. Ensure all strings have matching starting and ending quotes.",
+        "Tip: String not closed. Ensure all strings have matching starting and ending quotes.",
 
     "Invalid control character":
-        "🔧 Tip: Use proper escaping for special characters like \\n, \\t, etc. inside strings.",
+        "Tip: Use proper escaping for special characters like \\n, \\t, etc. inside strings.",
 
     "Expecting ':' delimiter":
-        "🔧 Tip: Missing colon between key and value → use \"key\": \"value\" format."
+        " Tip: Missing colon between key and value → use \"key\": \"value\" format."
 }
 
 def validate_json(json_string):
@@ -29,10 +29,10 @@ def validate_json(json_string):
         json.loads(json_string)
         return {
             "valid": True,
-            "message": "✅ JSON is valid!"
+            "message": " JSON is valid!"
         }
     except json.JSONDecodeError as e:
-        suggestion = "🔍 General JSON syntax error. Please double-check the structure."
+        suggestion = " General JSON syntax error. Please double-check the structure."
         for error_msg, tip in error_suggestions.items():
             if error_msg in e.msg:
                 suggestion = tip
@@ -48,7 +48,6 @@ def validate_json(json_string):
             }
         }
 
-# 📌 API Endpoint
 @app.route("/validate", methods=["POST"])
 def validate():
     data = request.get_json()
